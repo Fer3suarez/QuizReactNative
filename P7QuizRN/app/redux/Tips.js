@@ -9,8 +9,12 @@ export default class Tips extends React.Component {
 			<View>
 				<Text style={styles.titleTips}>Tips </Text>
 				<ScrollView>
-					{this.props.tips.map((tip) => 
-						<Text style={styles.tip}>{this.props.tips.size === 0 ? "There aren't tips for this question":tip}</Text>
+					{this.props.tips.map((tip, index) => {
+						return (
+							<Text style={styles.tip}>
+								{tip}
+							</Text>
+						)}
 					)}
 				</ScrollView>
 			</View>

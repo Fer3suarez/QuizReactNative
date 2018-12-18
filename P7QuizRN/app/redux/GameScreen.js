@@ -81,7 +81,6 @@ class GameScreen extends Component {
                 score = {this.props.score}
                 finished = {this.props.finished}
                 final = {this.final}/>
-          <MyButton onPress={() => this.props.navigation.goBack()} text={"Go back"}/>
       </View>
       
     );
