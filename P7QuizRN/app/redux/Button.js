@@ -23,7 +23,7 @@ export default class Button extends React.Component {
 
 const styles = StyleSheet.create({
     buttonText: {
-        fontSize: 15,
+        fontSize: 12,
         textAlign: 'center',
         flexWrap: 'nowrap',
         color: 'white',

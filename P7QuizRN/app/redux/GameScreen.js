@@ -1,5 +1,6 @@
+
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import {  AsyncStorage, StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import Game from './Game.js';
 import Navbar from './Navbar.js';
@@ -36,7 +37,6 @@ class GameScreen extends Component {
       })
       .catch(err => console.error(err));
   }
-  
   /*createCD(interval) {
     return (dispatch) => {
       setInterval( () => {
@@ -57,6 +57,15 @@ class GameScreen extends Component {
     if (buttonName === "Play Again"){
        this.download();
     }
+    if (buttonName === "Save"){
+       this.save();
+    }
+    if (buttonName === "Load"){
+       this.load();
+    }
+    if (buttonName === "Remove"){
+       this.remove();
+    }
     if (buttonName === "Next") {
       this.props.dispatch(changeQuestion(buttonName));
     } else if (buttonName === "Previous") {
@@ -68,7 +77,44 @@ class GameScreen extends Component {
       this.props.dispatch(submit(this.props.questions));
     }
   }
-  
+  async save(){
+
+    var questions = JSON.stringify(this.props.questions);
+    try {
+      await AsyncStorage.removeItem('@P7_2018_IWEB:quiz');
+      await AsyncStorage.setItem('@P7_2018_IWEB:quiz', questions); 
+      alert("Preguntas guardadas");
+
+    } catch (error) { 
+      alert("No se ha podido guardar las preguntas");
+    }
+    
+  }
+   async load(){
+
+    try {
+      var value = await AsyncStorage.getItem('@P7_2018_IWEB:quiz'); 
+      if (value != null) {
+        this.props.dispatch(initQuestions(JSON.parse(value)));
+        alert("Preguntas cargadas");
+        this.stopTimer();
+        this.startTimer();
+      } else {
+        alert("No hay preguntas guardadas");
+      }
+    } catch (error) { 
+      alert("No se han podido cargar las preguntas");
+    }
+    
+  }
+  async remove() {
+    try {
+      await AsyncStorage.removeItem('@P7_2018_IWEB:quiz');
+      alert("Preguntas borradas");
+    } catch (error) { 
+      alert("No se han podido borrar las preguntas");
+    }
+  }
 
   render() {
     return ( 

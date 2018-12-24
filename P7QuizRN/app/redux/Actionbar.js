@@ -15,24 +15,35 @@ export default class Actionbar extends React.Component {
 	render() {
 
 		return(
+			<View style={styles.actionbarT}>
 				<View style={styles.actionbar}>
 					<Button style={styles.button} buttonName = "Submit" onClick = {this.onClick} disabled = {this.props.finished}/>
 		      		<Button style={styles.button} buttonName = "Previous" onClick = {this.onClick} disabled = {this.props.currentQuestion === 0 || this.props.finished}/>
 		      		<Button style={styles.button} buttonName = "Next" onClick = {this.onClick} disabled = {this.props.currentQuestion === 9 || this.props.finished}/>
 		      		<Button style={styles.button} buttonName = "Play Again" onClick = {this.onClick}/>
 		      	</View>
-		      	
+		      	<View style={styles.actionbar}>
+		      		<Button style={styles.button} buttonName = "Save" onClick = {this.onClick} disabled = {this.props.finished}/>
+		      		<Button style={styles.button} buttonName = "Load" onClick = {this.onClick} disabled = {this.props.finished}/>
+		      		<Button style={styles.button} buttonName = "Remove" onClick = {this.onClick}/>
+		      	</View>
+		    </View>
 		);
 	}
 }
 const styles = StyleSheet.create({
 	actionbar: {
-		flex: .5,
 		height: 'auto',
 		textAlign: 'center',
 		flexDirection: 'row',
 		justifyContent: 'center',
 		borderRadius: 25,
-		marginTop: 25
+		marginTop: 15
+	},
+	actionbarT: {
+		flex: .6,
+		flexDirection: 'column',
+		justifyContent: 'center',
+		textAlign: 'center'
 	}
 })
