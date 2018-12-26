@@ -97,8 +97,6 @@ class GameScreen extends Component {
       if (value != null) {
         this.props.dispatch(initQuestions(JSON.parse(value)));
         alert("Preguntas cargadas");
-        this.stopTimer();
-        this.startTimer();
       } else {
         alert("No hay preguntas guardadas");
       }
